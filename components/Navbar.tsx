@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -18,7 +19,15 @@ const Navbar = () => {
                 </Link>
             </nav>
         </div>
+        <SignedOut>
+          <SignInButton mode="modal">
+
         <Button variant="outline">Sign In</Button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton/>
+        </SignedIn>
       </div>
     </div>
   );
