@@ -1,0 +1,37 @@
+import prisma from "@/lib/db";
+import { auth } from "@clerk/nextjs/server";
+import { error } from "console";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(request : NextRequest) {
+    const { userId } = await auth();
+    if(!userId){
+        return NextResponse.json({
+            error : "You are not authorized to access this route."
+        }, {
+            status : 401
+        })
+    }
+
+    const { name , content } = await request.json();
+
+    try {
+        const json = await prisma.jsonData.create({
+            data : {
+                name,
+                content,
+                userId
+            }
+        })
+        return NextResponse.json(json);
+    } catch (error) {
+        console.error('Error saving JSON', error)
+        return NextResponse.json({
+            error : 'Error saving JSON'
+        }, {
+            status : 500
+        })
+
+    }
+
+}
