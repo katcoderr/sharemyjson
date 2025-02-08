@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import {
   Table,
-  TableBody, TableCell,
+  TableBody,
+  TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from "@/components/ui/table";
 import { format } from "date-fns";
 import { JsonData } from "@prisma/client";
