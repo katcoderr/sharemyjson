@@ -15,6 +15,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
+import { set } from "date-fns";
 
 
 interface AddJsonDialogProps {
@@ -25,20 +26,18 @@ const AddJsonDialog = ({onSave}: AddJsonDialogProps) => {
 
     const [jsonData, setJsonData] = useState('')
     const [jsonName, setJsonName] = useState('')
-    console.log({
-        jsonData,
-        jsonName
-    });
+    const [openModal, setOpenModal] = useState<boolean>(false)
     
 
     const handleSave = async()=>{
         await onSave(jsonName,jsonData)
+        setOpenModal(false)
         setJsonData('')
         setJsonName('')
     }
 
   return (
-    <Dialog>
+    <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild><Button>
         Add JSON Data</Button></DialogTrigger>
       <DialogContent className="max-w-4xl">

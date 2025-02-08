@@ -3,14 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Footer } from "@/components/ui/large-name-footer";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
   weight: "100 900",
 });
 
@@ -26,14 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        <div className="max-w-4xl mx-auto px-4">{children}</div>
-      </body>
-    </html>
+      <html lang="en">
+        <body>
+          <Navbar />
+          <div className="max-w-4xl mx-auto px-4">
+            {children}
+            <Footer />
+          </div>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
