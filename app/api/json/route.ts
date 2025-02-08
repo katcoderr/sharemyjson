@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       },
       {
         status: 401,
-      }
+      },
     );
   }
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
@@ -48,7 +48,7 @@ export async function GET() {
       },
       {
         status: 401,
-      }
+      },
     );
   }
 
@@ -62,7 +62,7 @@ export async function GET() {
         id: true,
         name: true,
         createdAt: true,
-        content: true
+        content: true,
       },
     });
     return NextResponse.json(json);
@@ -74,8 +74,7 @@ export async function GET() {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
-

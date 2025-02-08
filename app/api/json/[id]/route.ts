@@ -8,7 +8,7 @@ export async function GET(
     params,
   }: {
     params: { id: string };
-  }
+  },
 ) {
   const { id } = params;
 
@@ -32,7 +32,7 @@ export async function GET(
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
@@ -43,7 +43,7 @@ export async function DELETE(
     params,
   }: {
     params: { id: string };
-  }
+  },
 ) {
   const { id } = params;
 
@@ -60,21 +60,18 @@ export async function DELETE(
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const { userId } = await auth();
   if (!userId) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { name, content } = await request.json();
@@ -84,7 +81,7 @@ export async function PUT(
     const json = await prisma.jsonData.update({
       where: {
         id: id,
-        userId: userId 
+        userId: userId,
       },
       data: {
         name,
@@ -94,9 +91,6 @@ export async function PUT(
     return NextResponse.json(json);
   } catch (error) {
     console.error("Error updating JSON", error);
-    return NextResponse.json(
-      { error: "Error updating JSON" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Error updating JSON" }, { status: 500 });
   }
 }

@@ -16,10 +16,9 @@ export default function SharedJson({ params }: SharedJsonProps) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const linkToCopy = `${baseUrl}/${id}`
+  const linkToCopy = `${baseUrl}/${id}`;
 
-  const [iscopied, setIsCopied] = useState(false)
-
+  const [iscopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,10 +44,18 @@ export default function SharedJson({ params }: SharedJsonProps) {
     <div className="mt-8 space-y-4">
       <div className="flex justify-between">
         <h1 className="text-2xl underline font-bold">{jsonData?.name}</h1>
-        {!iscopied ? <Button onClick={(e) => {
-        navigator.clipboard.writeText(linkToCopy)
-        setIsCopied(true)
-    }}>Copy Link</Button> : <Button>Copied!</Button>}
+        {!iscopied ? (
+          <Button
+            onClick={(e) => {
+              navigator.clipboard.writeText(linkToCopy);
+              setIsCopied(true);
+            }}
+          >
+            Copy Link
+          </Button>
+        ) : (
+          <Button>Copied!</Button>
+        )}
       </div>
       <CodeMirror
         value={jsonData?.content || ""}

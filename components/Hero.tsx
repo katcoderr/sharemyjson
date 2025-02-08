@@ -12,18 +12,21 @@ export const Hero = () => (
         </div>
         <div className="flex gap-4 flex-col">
           <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
-          Paste, Share, Done – Simple & Anonymous JSON Sharing
+            Paste, Share, Done – Simple & Anonymous JSON Sharing
           </h1>
           <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-          A fast, lightweight tool for developers to share JSON without hassle.
+            A fast, lightweight tool for developers to share JSON without
+            hassle.
           </p>
         </div>
         <div className="flex flex-row gap-3">
           <Button size="lg" className="gap-4" variant="outline">
-            <Link href="/dashboard">Upload JSON</Link> <UploadCloudIcon className="w-4 h-4" />
+            <Link href="/dashboard">Upload JSON</Link>{" "}
+            <UploadCloudIcon className="w-4 h-4" />
           </Button>
           <Button size="lg" className="gap-4">
-          <Link href="/sign-up">Sign Up Here!</Link> <UploadCloudIcon className="w-4 h-4" />
+            <Link href="/sign-up">Sign Up Here!</Link>{" "}
+            <UploadCloudIcon className="w-4 h-4" />
           </Button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import {
   Card,
@@ -12,7 +12,7 @@ import JsonDataTable from "./JsonDataTable";
 import AddJsonDialog from "./AddJsonDialog";
 
 const JsonEditor = () => {
-  const [refreshKey, setRefreshKey] = useState<number>(0)
+  const [refreshKey, setRefreshKey] = useState<number>(0);
   const handleSave = async (jsonName: string, jsonData: string) => {
     const response = await fetch("/api/json", {
       method: "POST",
@@ -24,7 +24,7 @@ const JsonEditor = () => {
     });
 
     if (response.ok) {
-      setRefreshKey((prev: number) => prev + 1)
+      setRefreshKey((prev: number) => prev + 1);
       console.log("JSON Saved");
     } else {
       console.error("Error saving JSON");

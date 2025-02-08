@@ -1,13 +1,11 @@
 name: Formatting on Push
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
-
   Continuous-Integration:
-
     name: Performs formatting on the application
     runs-on: ubuntu-latest
     steps:
@@ -17,10 +15,10 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      
+          node-version: "22"
+
       - name: Install Dependencies
         run: npm install
-        
+
       - name: Run Format
         run: npm run format:check

@@ -61,8 +61,8 @@ const JsonDataTable = () => {
           jsonDataList.map((item) =>
             item.id === id
               ? { ...item, name, content: content, updatedAt: new Date() }
-              : item
-          )
+              : item,
+          ),
         );
       } else {
         console.error("Error updating JSON data");
