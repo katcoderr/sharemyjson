@@ -1,0 +1,26 @@
+name: Formatting on Push
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+
+  Continuous-Integration:
+
+    name: Performs formatting on the application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Run Format
+        run: npm run format:check
