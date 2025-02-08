@@ -46,7 +46,7 @@ export default function SharedJson({ params }: SharedJsonProps) {
         <h1 className="text-2xl underline font-bold">{jsonData?.name}</h1>
         {!iscopied ? (
           <Button
-            onClick={(e) => {
+            onClick={() => {
               navigator.clipboard.writeText(linkToCopy);
               setIsCopied(true);
             }}

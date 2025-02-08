@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
+  TableBody, TableCell,
   TableHead,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/ui/table";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { JsonData } from "@prisma/client";
 import Link from "next/link";
-import { ShareIcon, TrashIcon, PencilIcon } from "lucide-react";
+import { ShareIcon, TrashIcon } from "lucide-react";
 import { UpdateJsonDialog } from "./UpdateJsonDialog";
 
 const JsonDataTable = () => {

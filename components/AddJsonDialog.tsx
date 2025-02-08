@@ -15,7 +15,6 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import CodeMirror from "@uiw/react-codemirror";
 import { json } from "@codemirror/lang-json";
-import { set } from "date-fns";
 
 interface AddJsonDialogProps {
   onSave: (name: string, value: string) => Promise<void>;
