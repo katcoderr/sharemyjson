@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(json);
     }
   } catch (error) {
+    console.error("Only JSON Data is allowed", error);
     return NextResponse.json(
       {
         message: "Only JSON Data is allowed",
