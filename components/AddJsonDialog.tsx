@@ -17,19 +17,26 @@ import CodeMirror from "@uiw/react-codemirror";
 import { json } from "@codemirror/lang-json";
 
 interface AddJsonDialogProps {
-  onSave: (name: string, value: string) => Promise<void>;
+  onSave: (name: string, value: string) => Promise<number | void>;
 }
 
-const AddJsonDialog = ({ onSave }: AddJsonDialogProps) => {
+const AddJsonDialog = ({
+  error,
+  onSave,
+}: AddJsonDialogProps & { error?: string }) => {
   const [jsonData, setJsonData] = useState("");
   const [jsonName, setJsonName] = useState("");
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const handleSave = async () => {
-    await onSave(jsonName, jsonData);
-    setOpenModal(false);
-    setJsonData("");
-    setJsonName("");
+    const errorCheck = await onSave(jsonName, jsonData);
+    if (errorCheck === 422) {
+      setOpenModal(true);
+    } else {
+      setOpenModal(false);
+      setJsonData("");
+      setJsonName("");
+    }
   };
 
   return (
@@ -55,6 +62,7 @@ const AddJsonDialog = ({ onSave }: AddJsonDialogProps) => {
           </div>
           <div className="grid gap-2">
             <Label>JSON Data</Label>
+            <p className="text-red-500 font-semibold text-sm">{error}</p>
             <CodeMirror
               value={jsonData}
               height="400px"

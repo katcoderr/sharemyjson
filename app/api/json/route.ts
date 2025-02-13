@@ -1,8 +1,11 @@
 import prisma from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
+import z from "zod";
 
 export async function POST(request: NextRequest) {
+  const jsoncheck = z.object({});
+
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json(
@@ -15,25 +18,33 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { name, content } = await request.json();
+  const data = await request.json();
+
+  const name = data.name;
+  const content = data.content;
 
   try {
-    const json = await prisma.jsonData.create({
-      data: {
-        name,
-        content,
-        userId,
-      },
-    });
-    return NextResponse.json(json);
+    const mycontent = JSON.parse(content);
+
+    const jsonTypeCheck = jsoncheck.parse(mycontent);
+
+    if (jsonTypeCheck) {
+      const json = await prisma.jsonData.create({
+        data: {
+          name,
+          content,
+          userId,
+        },
+      });
+      return NextResponse.json(json);
+    }
   } catch (error) {
-    console.error("Error saving JSON", error);
     return NextResponse.json(
       {
-        error: "Error saving JSON",
+        message: "Only JSON Data is allowed",
       },
       {
-        status: 500,
+        status: 422,
       },
     );
   }

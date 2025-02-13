@@ -12,6 +12,7 @@ import JsonDataTable from "./JsonDataTable";
 import AddJsonDialog from "./AddJsonDialog";
 
 const JsonEditor = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const [refreshKey, setRefreshKey] = useState<number>(0);
   const handleSave = async (jsonName: string, jsonData: string) => {
     const response = await fetch("/api/json", {
@@ -25,7 +26,11 @@ const JsonEditor = () => {
 
     if (response.ok) {
       setRefreshKey((prev: number) => prev + 1);
+      setErrorMessage("");
       console.log("JSON Saved");
+    } else if (response.status === 422) {
+      setErrorMessage("Only JSON Data is allowed");
+      return response.status;
     } else {
       console.error("Error saving JSON");
     }
@@ -41,7 +46,7 @@ const JsonEditor = () => {
         <JsonDataTable key={refreshKey} />
       </CardContent>
       <CardFooter>
-        <AddJsonDialog onSave={handleSave} />
+        <AddJsonDialog onSave={handleSave} error={errorMessage} />
       </CardFooter>
     </Card>
   );
